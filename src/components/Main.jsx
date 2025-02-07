@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, CircularProgress, Pagination } from '@mui/material';
+import { Grid, CircularProgress, Pagination, Box } from '@mui/material';
 import { consulta } from "./../global/general";
 import MiCard from "./MiCard";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ const Main = () => {
     const fetchData = async () => {
       let data = await obtenerData()
       if (data) {
-        setData(data)
+        setData(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
       }
       setCargando(false)
     };
@@ -54,7 +54,17 @@ const Main = () => {
     textAlign: "center"
   }}>
     {cargando ?
-      <CircularProgress />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          // width: "100vw"
+        }}
+      >
+        <CircularProgress sx={{ color: "#eba015" }} />
+      </Box>
       :
       <>
         <h1>¡Pick your Country!</h1>
@@ -75,7 +85,7 @@ const Main = () => {
         <Pagination
           count={totalPaginas}
           page={pagina}
-          onChange={(value) => setPagina(value)}
+          onChange={(event, value) => setPagina(value)}
           sx={{
             marginTop: 2,
             display: "flex",

@@ -7,7 +7,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import PropTypes from "prop-types";
 
 
-const MiCard = ({nombre, region, img, onclick}) => {
+const MiCard = ({ nombre, region, img, onclick }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea onClick={onclick}>
@@ -18,10 +18,21 @@ const MiCard = ({nombre, region, img, onclick}) => {
           alt={nombre}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{
+              color:"#eba015",
+              fontWeight: "700",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis"
+            }}
+          >
             {nombre}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          <Typography variant="body2" sx={{ color: '#000' }}>
             {region}
           </Typography>
         </CardContent>

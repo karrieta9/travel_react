@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, CircularProgress, List, ListItem, ListItemText, ListItemIcon, IconButton } from '@mui/material';
+import { Grid, CircularProgress, List, ListItem, ListItemText, ListItemIcon, IconButton, Box } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { consulta } from "./../global/general";
 import DomainIcon from '@mui/icons-material/Domain';
@@ -45,8 +45,18 @@ const Country = () => {
 
   return (
     <div style={{ width: "100%", height: "100vh" }}>
-      {cargando ? (
-        <CircularProgress />
+      { cargando ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            width: "100vw"
+          }}
+        >
+          <CircularProgress sx={{ color: "#eba015" }} />
+        </Box>
       ) : (
         <>
           <Grid container style={{ height: "100%", width: "100%" }}>
@@ -64,11 +74,11 @@ const Country = () => {
                 color: "#eba015",
                 boxShadow: "2px 4px 8px rgba(0, 0, 0, 0.3)",
                 transition: "0.3s ease-in-out",
-                "&:hover": { 
+                "&:hover": {
                   background: "#000",
                   boxShadow: "4px 6px 12px rgba(0, 0, 0, 0.4)"
                 },
-                "&:active": { 
+                "&:active": {
                   background: "red",
                   boxShadow: "none"
                 },
@@ -87,7 +97,7 @@ const Country = () => {
                     <DomainIcon sx={{ color: "white" }} />
                   </ListItemIcon>
                   <ListItemText
-                    primary={data[0].capital[0]}
+                    primary={data[0].capital ? data[0].capital[0] : ''}
                   />
                 </ListItem>
                 <ListItem>
@@ -103,7 +113,7 @@ const Country = () => {
                     <TravelExploreIcon sx={{ color: "white" }} />
                   </ListItemIcon>
                   <ListItemText
-                    primary={data[0].area}
+                    primary={`${data[0].area ? Number(data[0].area).toLocaleString("es-ES") : ''} mts2`}
                   />
                 </ListItem>
                 <ListItem>
@@ -111,7 +121,7 @@ const Country = () => {
                     <Groups2Icon sx={{ color: "white" }} />
                   </ListItemIcon>
                   <ListItemText
-                    primary={data[0].population}
+                    primary={data[0].population ? Number(data[0].population).toLocaleString("es-ES") : ''}
                   />
                 </ListItem>
                 <ListItem>
